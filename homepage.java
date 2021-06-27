@@ -67,6 +67,7 @@ public class homepage extends JFrame implements ActionListener
     {
        HospitalbedButton.addActionListener(this);
         covidpredictorButton.addActionListener(this);
+        logoutbutton.addActionListener(this);
 
     }
     @Override
@@ -79,9 +80,28 @@ public class homepage extends JFrame implements ActionListener
         }
         if(e.getSource()==covidpredictorButton)
         {
-            new covidprediction();
-            dispose();
+            frame.setVisible(false);
+            new covidprediction(username);
+            //dispose();
+            
 
+        }
+        if(e.getSource() == logoutbutton)
+        {
+            
+            LoginFrame frame1 =new LoginFrame();
+            frame1.setTitle("Login Form");
+            frame1.setVisible(true);
+            frame1.setBounds(100, 100, 750, 800);
+            frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            
+            
+            frame1.setResizable(false);
+            
+            
+            frame.setVisible(false);
+            //dispose();
+            
         }
         
 

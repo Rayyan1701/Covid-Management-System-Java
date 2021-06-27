@@ -24,6 +24,9 @@ public class Login
 
  class LoginFrame extends JFrame implements ActionListener {
 
+    public String userText;
+    public String pwdText;
+
     Container container = getContentPane();
     JLabel userLabel = new JLabel("USERNAME");
     JLabel titleLable = new JLabel("COVID MANAGEMENT SYSTEM");
@@ -85,8 +88,7 @@ public class Login
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
-            String userText;
-            String pwdText;
+            
             userText = userTextField.getText();
             pwdText = passwordField.getText().toString();
             // && passwordField.getText().equalsIgnoreCase("12345")
@@ -95,8 +97,9 @@ public class Login
                 
                 new homepage(userText);
                // covidprediction obj = new covidprediction();
-                dispose();
-               
+                //dispose();
+               this.setVisible(false);
+
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
                 

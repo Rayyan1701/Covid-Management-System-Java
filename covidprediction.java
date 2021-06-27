@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class covidprediction extends JFrame implements ActionListener {
 
+    String username;
     JFrame frame = new JFrame();
     Container container = getContentPane();
 
@@ -37,7 +38,10 @@ public class covidprediction extends JFrame implements ActionListener {
     JButton clearButton = new JButton("CLEAR");
     // JCheckBox showPassword = new JCheckBox("Show Password");
 
-    public covidprediction() {
+    JButton gobackbutton = new JButton(" <-GoBack ");
+
+    public covidprediction(String user) {
+        username = user;
         frame.setTitle("COVID PREDICTOR");
         frame.setVisible(true);
         frame.setBounds(100, 100, 750, 850);
@@ -61,6 +65,8 @@ public class covidprediction extends JFrame implements ActionListener {
     public void setLocationAndSize() {
         titleLable.setBounds(220, 50, 500, 100);
         titleLable.setFont(new Font("Serif", Font.PLAIN, 40));
+
+        gobackbutton.setBounds(60, 60, 100, 50);
 
         coughcheckbox.setBounds(270, 150, 250, 50);
         fevercheckbox.setBounds(270, 200, 250, 50);
@@ -131,12 +137,17 @@ public class covidprediction extends JFrame implements ActionListener {
 
         container.add(warninglabel);
         warninglabel.setVisible(false);
+
+        container.add(gobackbutton);
     }
 
     public void addActionEvent() {
         calculateButton.addActionListener(this);
         clearButton.addActionListener(this);
+        gobackbutton.addActionListener(this);
         // showPassword.addActionListener(this);
+
+       
     }
 
     void progressbarfunction()
@@ -159,6 +170,15 @@ public class covidprediction extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource()==gobackbutton)
+        {
+            frame.setVisible(false);
+            new homepage(username);
+        }
+
+
+
         // Coding Part of LOGIN button
         if (e.getSource() == calculateButton) {
 
@@ -293,7 +313,7 @@ public class covidprediction extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
 
-        covidprediction obj = new covidprediction();
+        covidprediction obj = new covidprediction(" ");
         // JFrame frame;
         // frame= new JFrame("covid predictor");
         // covidprediction frame = new covidprediction();
