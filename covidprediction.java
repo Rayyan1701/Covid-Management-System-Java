@@ -198,16 +198,16 @@ public class covidprediction extends JFrame implements ActionListener {
                 travelhistory2.setSelected(false);
                 
             }
-            if(travelhistory1.isSelected())
+            else if(travelhistory1.isSelected())
             {
                 travelhistory0.setSelected(false);
                 travelhistory2.setSelected(false);
                 
             }
-            if(travelhistory2.isSelected())
+            else if(travelhistory2.isSelected())
             {
                 travelhistory0.setSelected(false);
-                travelhistory2.setSelected(false);
+                travelhistory1.setSelected(false);
                 
             }
 

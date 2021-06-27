@@ -93,7 +93,8 @@ public class Login
             if (userText.equalsIgnoreCase("mehtab") && pwdText.equalsIgnoreCase("12345")) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
                 
-                covidprediction obj = new covidprediction();
+                new homepage(userText);
+               // covidprediction obj = new covidprediction();
                 dispose();
                
             } else {
