@@ -22,7 +22,11 @@ public class covidprediction extends JFrame implements ActionListener {
     JCheckBox travelhistory2 = new JCheckBox(" Came in Contacht with covid positive patient");
     // JSpinner //travelhistoryspinner =new JSpinner();
 
+    JProgressBar progressbar =new JProgressBar();
+
     JLabel resultlabel = new JLabel(" RESULT :");
+    JLabel probabilityresult =new JLabel(" Probability of having Covid-19 : ");
+    JLabel warninglabel =new JLabel(" please get tested ASAP as u have high changes of being covid infected right now");
 
     // JLabel userLabel = new JLabel("USERNAME");
     JLabel titleLable = new JLabel("COVID PREDICTOR");
@@ -67,7 +71,7 @@ public class covidprediction extends JFrame implements ActionListener {
         travelhistorylabel.setBounds(270, 400, 150, 30);
         travelhistory0.setBounds(300, 450, 150, 30);
         travelhistory1.setBounds(300, 480, 150, 30);
-        travelhistory2.setBounds(300, 510, 150, 30);
+        travelhistory2.setBounds(300, 510, 200, 30);
 
         coughcheckbox.setFont(new Font("Serif", Font.PLAIN, 20));
         fevercheckbox.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -84,8 +88,16 @@ public class covidprediction extends JFrame implements ActionListener {
         calculateButton.setBounds(230, 550, 120, 30);
         clearButton.setBounds(380, 550, 100, 30);
 
+        progressbar.setBounds(230, 590, 250, 30);
+        progressbar.setValue(0);
+        progressbar.setStringPainted(true);
+
         resultlabel.setBounds(200, 650, 200, 50);
         resultlabel.setFont(new Font("Serif", Font.PLAIN, 30));
+
+        probabilityresult.setBounds(200, 700, 300, 50);
+
+        warninglabel.setBounds(200, 750, 400, 50);;
 
     }
 
@@ -109,7 +121,16 @@ public class covidprediction extends JFrame implements ActionListener {
         container.add(calculateButton);
         container.add(clearButton);
 
+        container.add(progressbar);
+
         container.add(resultlabel);
+        resultlabel.setVisible(false);
+
+        container.add(probabilityresult);
+        probabilityresult.setVisible(false);
+
+        container.add(warninglabel);
+        warninglabel.setVisible(false);
     }
 
     public void addActionEvent() {
@@ -118,12 +139,30 @@ public class covidprediction extends JFrame implements ActionListener {
         // showPassword.addActionListener(this);
     }
 
+    void progressbarfunction()
+    {
+        int i = 0;
+        try {
+            progressbar.setValue(i);
+            while (i <= 100) {
+                // fill the menu bar
+                progressbar.setValue(i + 10);
+ 
+                // delay the thread
+                Thread.sleep(500);
+                i += 20;
+            }
+        }
+        catch (Exception e) {
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // Coding Part of LOGIN button
         if (e.getSource() == calculateButton) {
 
-            int cough;
+            int cough=0;
             int fever = 0;
             int sore_throat = 0;
 
@@ -187,6 +226,25 @@ public class covidprediction extends JFrame implements ActionListener {
                 travel_history=2;
             }
 
+            progressbarfunction();
+
+            resultlabel.setVisible(true);
+
+            double i=0.0;
+             i=(0.04285044*cough)+(0.00539787*fever)+(0.01902055*sore_throat)+(0.09647643*shortness_of_breath)+(0.09647643*head_ache)+(-0.04837609*gender)+(0.34*travel_history);
+    
+             probabilityresult.setVisible(true);
+             probabilityresult.setText(" Probability of having Covid-19 : "+ i);
+             if(i>0.5)
+             {
+                 warninglabel.setVisible(true);
+
+             }
+             else
+             {
+                 warninglabel.setText("Your chances of having covid is Low");
+                 warninglabel.setVisible(true);
+             }
 
 
             // String userText;
@@ -216,6 +274,8 @@ public class covidprediction extends JFrame implements ActionListener {
             travelhistory0.setSelected(false);
             travelhistory1.setSelected(false);
             travelhistory2.setSelected(false);
+
+            resultlabel.setVisible(false);
 
         }
 
