@@ -21,7 +21,7 @@ public class homepage extends JFrame implements ActionListener
         username =user;
         frame.setTitle("HOME PAGE");
         frame.setVisible(true);
-       // frame.setBounds(100, 100, 750, 850);
+        frame.setBounds(50, 50, 1500, 900);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(container);
 
@@ -75,6 +75,8 @@ public class homepage extends JFrame implements ActionListener
     {
         if(e.getSource()==HospitalbedButton)
         {
+            frame.setVisible(false);
+            new MyGridLayout(username);
             
 
         }
