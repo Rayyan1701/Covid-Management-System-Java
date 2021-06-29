@@ -21,6 +21,8 @@ public class MyGridLayout extends JFrame implements ActionListener {
     JButton gobackbutton = new JButton(" <-GoBack ");
     String username;
 
+    JButton editButton = new JButton("EDIT");
+
     MyGridLayout(String user) {
         
         username =user;
@@ -39,19 +41,21 @@ public class MyGridLayout extends JFrame implements ActionListener {
         numberofbeds[4]=Integer.valueOf(10);
         numberofbeds[5]=Integer.valueOf(10);
 
+        addcomponentstopanel();
+        
         addcomponentstoframe();
         setsizeframecomponets();
 
-        addcomponentstopanel();
-        setsizesinpanel();
+        
 
         f.add(panel);
-        f.setSize(400, 400);
+        f.setSize(1200, 800);
         f.setLayout(null);
         f.setVisible(true);
 
 
         gobackbutton.addActionListener(this);
+        editButton.addActionListener(this);
 
        
 
@@ -60,6 +64,7 @@ public class MyGridLayout extends JFrame implements ActionListener {
     void addcomponentstoframe() {
         f.add(bedtitlelabel);
         f.add(gobackbutton);
+        f.add(editButton);
 
     }
 
@@ -69,6 +74,31 @@ public class MyGridLayout extends JFrame implements ActionListener {
 
         gobackbutton.setBounds(60, 60, 100, 50);
 
+        editButton.setBounds(730, 740, 100, 50);
+        if(!editaccessible(username))
+        {
+              editButton.setVisible(false);
+        }
+
+    }
+
+    Boolean editaccessible(String user)
+    {
+        try
+        {
+        for(int i=0;i<6;i++)
+        {
+            if(hospitalnames[i].getText().equalsIgnoreCase(user))
+            {
+                return true;
+            }
+        }
+        }
+        catch(NullPointerException e)
+        {
+            
+        }
+        return false;
     }
 
     void addhospitalnametolables()
@@ -126,7 +156,7 @@ public class MyGridLayout extends JFrame implements ActionListener {
             label3.add(bedavailabilitylabel[2]);
 
 
-            hospitalnames[3]= new JLabel("<html>BANGALORE INSTITUTE OF<br/>     GASTROENTEROLOGY</html>");
+            hospitalnames[3]= new JLabel("Appolo Hospital");
             hospitalnames[3].setBounds(20, 20, 420, 50);
             hospitalnames[3].setBackground(Color.red);
             hospitalnames[3].setFont(new Font("Serif", Font.BOLD, 20));
@@ -226,9 +256,7 @@ public class MyGridLayout extends JFrame implements ActionListener {
 
     }
 
-    void setsizesinpanel() {
-
-    }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -237,12 +265,50 @@ public class MyGridLayout extends JFrame implements ActionListener {
             f.setVisible(false);
             new homepage(username);
         }
+        if(e.getSource()==editButton)
+        {
+            int i;
+            System.out.println("hello");
+          
+            i= gethospital();
+            
+            if(i!=-1)
+            {
+                String m = JOptionPane.showInputDialog("Enter BED Count in "+username);
+                
+                numberofbeds[i]=Integer.parseInt(m);
+              
+               bedavailabilitylabel[i].setText(" BED'S AVAILABLE : "+ numberofbeds[i]);
+
+
+            }
+
+        }
 
 
 
     }
+    int gethospital()
+    {
+        try
+        {
+        for(int i=0;i<6;i++)
+        {
+            if(hospitalnames[i].getText().equalsIgnoreCase(username))
+            {
+                return i;
+            }
+        }
+        }
+        catch(NullPointerException e)
+        {
+            
+        }
+        return -1;
+
+    }
 
     public static void main(String args[]) {
-        new MyGridLayout(" ");
+        new MyGridLayout("BMS HOSPITAL");
     }
 }

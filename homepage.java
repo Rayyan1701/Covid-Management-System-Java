@@ -99,6 +99,8 @@ public class homepage extends JFrame implements ActionListener
             
             
             frame1.setResizable(false);
+
+            frame1.setVisible(true);
             
             
             frame.setVisible(false);
