@@ -76,7 +76,7 @@ public class homepage extends JFrame implements ActionListener
         if(e.getSource()==HospitalbedButton)
         {
             frame.setVisible(false);
-            new MyGridLayout(username);
+            new covidbeds(username);
             
 
         }
